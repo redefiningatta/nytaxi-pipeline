@@ -1,0 +1,30 @@
+services: 
+  Postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: nytaxi
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data/raw:/var/lib/postgresql/data
+    networks:
+      - taxi_net
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@nytaxi.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8080:80"
+    networks:
+      - taxi_net
+    depends_on:
+      - Postgres
+    
+
+networks:
+  taxi_net:
+    driver: bridge
