@@ -12,6 +12,6 @@ venv/
 .env
 
 # Data & Keys
-data/*.parquet
-data/*.csv
-keys/*.json
+docker/data/*.parquet
+docker/data/*.csv
+keys/*.jsoncd ,
