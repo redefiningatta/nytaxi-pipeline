@@ -1,6 +1,65 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# import os
+# import argparse
+# import pandas as pd
+# from sqlalchemy import create_engine
+# from tqdm.auto import tqdm
+
+# def load_nytaxi_data(params):
+#     user = params.user
+#     password = params.password
+#     host = params.host
+#     port = params.port
+#     db = params.db
+#     table_name = params.table_name
+    
+#     month = str(params.month).zfill(2)
+
+#     url = f"https://github.com/DataTalksClub/nyc-tlc-data/releases/download/{params.colour}/{params.colour}_tripdata_{params.year}-{month}.csv.gz"
+#     engine = create_engine(f'postgresql://{user}:{password}@{host}:{port}/{db}')
+
+#     print(f"Loading data from {url} into table {table_name}")
+    
+#     df_iter = pd.read_csv(
+#             url,
+#             iterator=True,
+#             chunksize=100000,
+#             low_memory=False
+#         )
+
+#     for df_chunk in tqdm(df_iter):
+#         t_cols = [col for col in df_chunk.columns if 'tpep' in col or 'pickup' in col or 'dropoff' in col]
+#         for col in t_cols:
+#             df_chunk[col] = pd.to_datetime(df_chunk[col])
+        
+#         # Insert chunk
+#         df_chunk.to_sql(
+#             name=table_name,
+#             con=engine,
+#             if_exists="append",
+#             index=False
+#         )
+#         print("Inserted chunk")
+
+# if __name__ == "__main__":
+    
+#     parser = argparse.ArgumentParser(description="Load NY Taxi data into Postgres")
+#     parser.add_argument("--user", required=True, help="Postgres username")
+#     parser.add_argument("--password", required=True, help="Postgres password")
+#     parser.add_argument("--host", required=True, help="Postgres host")
+#     parser.add_argument("--port", required=True, help="Postgres port")
+#     parser.add_argument("--db", required=True, help="Postgres database name")
+#     parser.add_argument("--table_name", required=True, help="Target table name in Postgres")
+#     parser.add_argument("--colour", required=True, default=os.getenv("COLOUR", "yellow"), choices=["yellow", "green"], help="Taxi data colour (yellow or green)")
+#     parser.add_argument("--year", required=True, type=int, help="Year of the data to load")
+#     parser.add_argument("--month", required=True, type=int, help="Month of the data to load (1-12)")
+
+#     args = parser.parse_args()
+#     load_nytaxi_data(args)
+
+
 
 import os
 import argparse

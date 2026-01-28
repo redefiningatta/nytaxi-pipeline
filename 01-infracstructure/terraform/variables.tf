@@ -5,8 +5,7 @@ variable "credentials" {
 
 variable "project" {
   description = "Project"
-  default     = "nytaxi-485607" # Replace with your actual GCP Project ID
-}
+  default     = "nytaxi-485607" 
 
 variable "region" {
   description = "Region"

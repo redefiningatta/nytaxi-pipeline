@@ -12,7 +12,7 @@ provider "google" {
   region      = var.region
 }
 
-# Decision: Create the GCS Bucket (Data Lake)
+# Create the GCS Bucket (Data Lake)
 resource "google_storage_bucket" "data-lake-bucket" {
   name          = var.gcs_bucket_name
   location      = var.location
@@ -29,7 +29,7 @@ resource "google_storage_bucket" "data-lake-bucket" {
   }
 }
 
-# Decision: Create the BigQuery Dataset (Data Warehouse)
+# Create the BigQuery Dataset (Data Warehouse)
 resource "google_bigquery_dataset" "dataset" {
   dataset_id = var.bq_dataset_name
   location   = var.location
