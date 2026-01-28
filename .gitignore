@@ -10,8 +10,10 @@ __pycache__/
 *$py.class
 venv/
 .env
+.ipynb_checkpoints
 
 # Data & Keys
-docker/data/*.parquet
-docker/data/*.csv
-keys/*.jsoncd ,
+./docker/data/*.parquet
+./docker/data/*.csv
+./docker/data/raw/*
+./keys/*.json
