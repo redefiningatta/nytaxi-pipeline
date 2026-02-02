@@ -10,9 +10,9 @@ services:
   pgdatabase:
     image: postgres:18
     environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: root
-      POSTGRES_DB: nytaxi
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - "5432:5432"
     volumes:
@@ -24,8 +24,8 @@ services:
   pgadmin:
     image: dpage/pgadmin4
     environment:
-      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
-      - PGADMIN_DEFAULT_PASSWORD=root
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PASSWORD}
     ports:
       - "8085:80"
     depends_on:
@@ -37,9 +37,9 @@ services:
     volumes:
       - kestra_postgres_data:/var/lib/postgresql
     environment:
-      POSTGRES_DB: kestra
-      POSTGRES_USER: kestra
-      POSTGRES_PASSWORD: kestra
+      POSTGRES_DB: ${KESTRA_DB}
+      POSTGRES_USER: ${KESTRA_USER}
+      POSTGRES_PASSWORD: ${KESTRA_PASSWORD}
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
       interval: 30s
@@ -59,15 +59,15 @@ services:
       KESTRA_CONFIGURATION: |
         datasources:
           postgres:
-            url: jdbc:postgresql://kestra_postgres:5432/kestra
+            url: jdbc:postgresql://kestra_postgres:5432/${KESTRA_DB}
             driverClassName: org.postgresql.Driver
-            username: kestra
-            password: kestra
+            username: ${KESTRA_USER}
+            password: ${KESTRA_PASSWORD}
         kestra:
           server:
             basicAuth:
-              username: "redefiningatta@gmail.com" 
-              password: Admin1234
+              username: ${KESTRA_AUTH_EMAIL}
+              password: ${KESTRA_AUTH_PASSWORD}
           repository:
             type: postgres
           storage:
