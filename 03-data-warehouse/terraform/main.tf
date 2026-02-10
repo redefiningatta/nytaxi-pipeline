@@ -8,15 +8,15 @@ terraform {
 }
 
 provider "google" {
-  project     = var.project
-  region      = var.region
+  project = var.project
+  region  = var.region
 }
 
 # Create the GCS Bucket (Data Lake)
 resource "google_storage_bucket" "data-lake-bucket" {
-  name          = var.gcs_bucket_name
-  location      = var.location
-  force_destroy = true
+  name                        = var.gcs_bucket_name
+  location                    = var.location
+  force_destroy               = true
   uniform_bucket_level_access = true
 
   lifecycle_rule {
@@ -29,8 +29,3 @@ resource "google_storage_bucket" "data-lake-bucket" {
   }
 }
 
-# Create the BigQuery Dataset (Data Warehouse)
-resource "google_bigquery_dataset" "dataset" {
-  dataset_id = var.bq_dataset_name
-  location   = var.location
-}
